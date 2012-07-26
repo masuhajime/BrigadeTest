@@ -3,10 +3,11 @@ phantom.injectJs('app/bootstrap.js');
 function Main(){}
 Main.prototype = new Loop()
 var m = new Main()
-var chara = new Chara();
-Chocobo.set_casper__callback()
+var chara = new Chara()
+Chocobo.set_casper_callback()
 m.init = function() {
     m.item_checked = 0;
+    Util.echo('----- start treasure')
 }
 m.get_treasure = function() {
     if (80 < chara.num_weapon) {
@@ -24,6 +25,7 @@ m.get_treasure = function() {
         if (0 == v) {
             m.item_checked = 1
             Util.echo('empty: treasure box')
+            Util.echo('----- start chocobo')
             return
         }
         casper.then(function(){
@@ -53,7 +55,6 @@ m.get_other = function () {
 }
 var chocobo_url = new Array
 m.get_chocobo = function () {
-    
     if (Util.urlMatch(URL.ffb_chocobo_feed_fla())) {
         Click.quest()
         return;
@@ -73,11 +74,14 @@ m.get_chocobo = function () {
         }
         if (0 == chocobo_url.length) {
             Util.open(URL.ffb_box_chocobo())
-        }
-        if (0 == chocobo_url.length) {
-            m.item_checked = 2
-            Util.echo('empty: chocobo box')
-            return
+            casper.then(function(){
+                if (0 == chocobo_url.length) {
+                    m.item_checked = 2
+                    Util.echo('empty: chocobo box')
+                    Util.echo('----- start other item')
+                    return
+                }
+            })
         }
     })
 }

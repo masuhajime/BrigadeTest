@@ -1,6 +1,6 @@
 // 非常に辛いコード
 var Chocobo = {
-    set_casper__callback : function() {
+    set_casper_callback : function() {
         // gettig chocobo url before run js
         casper.on('http.status.200', function() {
             if (-1 == this.getCurrentUrl().match(new RegExp("p_cond=302$", "i"))) {

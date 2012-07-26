@@ -46,5 +46,8 @@ var URL = {
     },
     ffb_attack_url: function(chk_id, bp) {
         return 'http://ff.sp.mbga.jp/_ffjm_team_btl?chk='+chk_id+'&use_bp='+bp+'&t='+(Date.now());
+    },
+    ffb_team_btl_rdy : function(){
+        return 'http://ff.sp.mbga.jp/_ffjm_team_btl_rdy'
     }
 }

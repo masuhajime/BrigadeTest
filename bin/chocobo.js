@@ -5,7 +5,7 @@ Main.prototype = new Loop();
 var m = new Main();
 var chara = new Chara();
 var chocobo_url = new Array
-Chocobo.set_casper__callback()
+Chocobo.set_casper_callback()
 m.init = function() {
     Util.echo("init")
     Util.open(URL.ffb_box_chocobo())

@@ -1,7 +1,10 @@
 // 配置ディレクトリ
-var DIR_BASE = '/Users/*/phantomjs';
+var DIR_BASE = '/Users/masuhajime/phantomjs';
+// OS
+var OS = 0;// Linux/MaxOSX = 0, Windows = 1
 
-var DIR = {
+var DIR = (function(){
+    return {
     BASE: DIR_BASE,
     APP: DIR_BASE+'/app',
     MODEL: DIR_BASE+'/app/model',
@@ -9,7 +12,8 @@ var DIR = {
     HELPER: DIR_BASE+'/app/helper',
     CONFIG: DIR_BASE+'/config',
     LIB: DIR_BASE+'/lib'
-}
+    }
+})()
 
 var ConfigApp = {
     IS_INJECT_CASPERJS: false,
