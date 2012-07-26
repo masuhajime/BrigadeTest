@@ -1,5 +1,5 @@
 // 配置ディレクトリ
-var DIR_BASE = '/Users/masuhajime/phantomjs';
+var DIR_BASE = '/Users/*/phantomjs';
 
 var DIR = {
     BASE: DIR_BASE,
