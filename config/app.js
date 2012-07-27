@@ -1,7 +1,5 @@
 // 配置ディレクトリ
 var DIR_BASE = '/Users/masuhajime/phantomjs';
-// OS
-var OS = 0;// Linux/MaxOSX = 0, Windows = 1
 
 var DIR = (function(){
     return {
