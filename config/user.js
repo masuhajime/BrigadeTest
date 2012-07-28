@@ -1,0 +1,4 @@
+var ConfigUser = {
+    MAIL: '',
+    PASSWORD: ''
+}
