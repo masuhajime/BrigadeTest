@@ -10,7 +10,7 @@ m.init = function() {
     Util.echo('----- start treasure')
 }
 m.get_treasure = function() {
-    if (80 < chara.num_weapon) {
+    if (ConfigGame.AUTO_SELL_NUM_WEAPON < chara.num_weapon) {
         Util.echo('selling weapon')
         chara.sellAutoWeapon();
         return;
