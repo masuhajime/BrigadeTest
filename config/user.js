@@ -1,4 +1,0 @@
-var ConfigUser = {
-    MAIL: '',
-    PASSWORD: ''
-}
