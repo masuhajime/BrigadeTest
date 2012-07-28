@@ -15,6 +15,7 @@ Boss.prototype = {
         lv = 0
         name = 0
         minutes = 0
+        is_attacked = false
     },
     isAlive : function() {
         return 0 < this.hp;
