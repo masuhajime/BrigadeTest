@@ -1,3 +1,5 @@
+// テストの挙動に関する設定項目
+
 var ConfigGame = {
     // 巡回クエストid
     QUEST_ID: 101001,
@@ -10,5 +12,7 @@ var ConfigGame = {
     // 武器がこの数値以上なら自動売却
     AUTO_SELL_NUM_WEAPON: 70,
     // 敵がこのHP以下ならば通常攻撃しかしない
-    ENEMY_HP_BORDER_FULL_ATTACK: 500000
+    ENEMY_HP_BORDER_FULL_ATTACK: 500000,
+    // ボスの状態確認間隔(ms)
+    INTERVAL_ENEMY_CHECK: 60*1000
 }
