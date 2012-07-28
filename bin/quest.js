@@ -4,6 +4,7 @@ function Main(){}
 Main.prototype = new Loop()
 var m = new Main()
 var chara = new Chara()
+// for avoiding quest loops
 m.quest_count = 0
 m.init = function() {
 }
@@ -48,12 +49,12 @@ m.main = function() {
 }
 m.controller = function() {
     // check ability
-    if (70 < chara.num_ability) {
+    if (ConfigGame.AUTO_SELL_NUM_ABILITY < chara.num_ability) {
         casper.then(m.sell_ability)
         return
     }
     // go quest
-    if (4 < chara.lp) {
+    if (ConfigGame.QUEST_LP_BORDER < chara.lp) {
         casper.then(m.quest_go)
     } else {
         casper.then(m.wait_recover)
@@ -68,11 +69,11 @@ m.quest_click = function() {
 }
 m.quest_go = function() {
     Util.echo('starting quest')
-    Util.open(URL.ffb_quest(101001));
+    Util.open(URL.ffb_quest(ConfigGame.QUEST_ID));
 }
 m.wait_recover = function() {
     Util.echo('waiting LP recover')
-    Util.sleep(600*1000)
+    Util.sleep(ConfigGame.QUEST_WAIT_TIME)
     casper.then(m.main)
 }
 
