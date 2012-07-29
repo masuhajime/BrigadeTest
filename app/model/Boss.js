@@ -18,7 +18,6 @@ Boss.prototype = {
         is_attacked = false
     },
     isAlive : function() {
-        return true
         return 0 < this.hp;
     },
     echoStatus: function() {
