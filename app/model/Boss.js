@@ -13,11 +13,12 @@ Boss.prototype = {
         hp = 0
         hp_max = 0
         lv = 0
-        name = 0
+        name = ''
         minutes = 0
         is_attacked = false
     },
     isAlive : function() {
+        return true
         return 0 < this.hp;
     },
     echoStatus: function() {
@@ -37,7 +38,7 @@ Boss.prototype = {
         casper.thenOpen(URL.ffb_battle_top(), function(){
             if (Util.urlMatch('_ffjm_swf_intrpt')) {
                 this.echo(d()+"New Enemy appered.")
-                boss.initialize()
+                boss.initialize.apply(this, arguments)
                 return
             }
             // enemy stat get start
@@ -47,26 +48,34 @@ Boss.prototype = {
             s = s.replace(/[\s ]/gi,"");
             //this.echo(s)
             //var r = s.match(/(.*)? (\d{1,2})HP:(\d+)\/(\d+)/i);
+            //ｶｰﾊﾞﾝｸﾙ36HP:205316/2641548逃亡まであと13分58秒××詳細
             //ｷﾞﾙｶﾞﾒｯｼｭ(FFV)7HP:3997483/10000000逃亡まであと26分29秒×詳細
-            var r = s.match(/(.*[^\d])?([0-9]{1,2})HP:(\d+)\/(\d+).+([0-9]{2})分/i);
+            //var r = s.match(/(.+[^\d])?([0-9]{1,2})HP:(\d+)\/(\d+).+([0-9]{2})分/i);
+            var r = s.match(/(.*)HP:(.*)/i)
             if (r == null) {
                 this.echo(d()+"Cant found enemy info")
-                boss.initialize()
+                boss.initialize.apply(this, arguments)
                 return;
             }
-            boss.name = RegExp.$1;
-            boss.lv = RegExp.$2;
-            var boss_hp = parseInt(RegExp.$3)
-            if (parseInt(boss.hp) < boss_hp) {
-                boss.initialize()
+            var name_and_lv = RegExp.$1// ｶｰﾊﾞﾝｸﾙ36
+            var other_info = RegExp.$2// 205316/2641548逃亡まであと13分58秒××詳細
+            name_and_lv.match(/^(.+?)(Lv)?(\d+)$/i)
+            boss.name = RegExp.$1
+            boss.lv = RegExp.$3
+            other_info.match(/(\d+)\/(\d+).+?([0-9]+)分/)
+            var boss_hp = parseInt(RegExp.$1)
+            if (boss.hp != 0 && boss.hp < boss_hp) {
+                boss.initialize.apply(this, arguments)
+                return
             }
             boss.hp = boss_hp
-            var boss_hp_max = parseInt(RegExp.$4)
-            if (boss.hp_max != boss_hp_max) {
-                boss.initialize()
+            var boss_hp_max = parseInt(RegExp.$2)
+            if (boss.hp_max != 0 && boss.hp_max != boss_hp_max) {
+                boss.initialize.apply(this, arguments)
+                return
             }
-            boss.hp_max = RegExp.$4;
-            boss.minutes = RegExp.$5;
+            boss.hp_max = boss_hp_max;
+            boss.minutes = RegExp.$3;
         })
     }
 }
