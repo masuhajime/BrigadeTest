@@ -76,7 +76,11 @@ m.main = function() {
     chara.getStatus()
     casper.then(function(){
         var is_alive = boss.isAlive()
-        if (is_alive) {
+        if (0 == chara.bp) {
+            boss.echoStatus()
+            chara.echoStatus()
+            Util.sleep(ConfigGame.INTERVAL_ENEMY_CHECK)
+        } else if (is_alive) {
             boss.echoStatus()
             chara.echoStatus()
             m.controller_attack()
