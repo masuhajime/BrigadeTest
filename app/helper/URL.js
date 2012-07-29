@@ -49,5 +49,11 @@ var URL = {
     },
     ffb_team_btl_rdy : function(){
         return 'http://ff.sp.mbga.jp/_ffjm_team_btl_rdy'
+    },
+    ffb_lv_cap_ability_normal : function() {
+        return 'http://ff.sp.mbga.jp/_ffjm_evolution_base_select?it=1&st=level_desc&ev=2'
+    },
+    ffb_lv_cap_ability_event : function() {
+        return 'http://ff.sp.mbga.jp/_ffjm_evolution_base_select?it=1&st=level_desc&ev=1'
     }
 }
