@@ -61,7 +61,7 @@ m.controller_attack = function() {
         return
     }
     // 攻撃してくれない様なら、ここのコメントアウト外して調べる
-    //Util.echo(URL.ffb_attack_url(chk_id, attack_type))
+    Util.echo(URL.ffb_attack_url(chk_id, attack_type))
     casper.thenOpen(URL.ffb_attack_url(chk_id, attack_type), function(){
         boss.is_attacked = true
     });
@@ -76,14 +76,14 @@ m.main = function() {
     chara.getStatus()
     casper.then(function(){
         var is_alive = boss.isAlive()
-        if (0 == chara.bp) {
+        if (is_alive) {
             boss.echoStatus()
             chara.echoStatus()
-            Util.sleep(ConfigGame.INTERVAL_ENEMY_CHECK)
-        } else if (is_alive) {
-            boss.echoStatus()
-            chara.echoStatus()
-            m.controller_attack()
+            if (0 == chara.bp) {
+                Util.sleep(ConfigGame.INTERVAL_ENEMY_CHECK)
+            } else {
+                m.controller_attack()
+            }
         } else {
             Util.sleep(ConfigGame.INTERVAL_ENEMY_CHECK)
         }
