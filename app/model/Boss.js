@@ -1,21 +1,20 @@
 function Boss() {
-    this.initialize.apply(this, arguments)
+    this.init()
 }
 Boss.prototype = {
     hp: 0,
     hp_max: 0,
     lv: 0,
-    name: 0,
+    name: '',
     minutes: 0,
     is_attacked: false,
-    initialize: function() {
-        is_attacked = false
-        hp = 0
-        hp_max = 0
-        lv = 0
-        name = ''
-        minutes = 0
-        is_attacked = false
+    init: function() {
+        this.hp = 0
+        this.hp_max = 0
+        this.lv = 0
+        this.name = ''
+        this.minutes = 0
+        this.is_attacked = false
     },
     isAlive : function() {
         return 0 < this.hp;
@@ -37,7 +36,7 @@ Boss.prototype = {
         casper.thenOpen(URL.ffb_battle_top(), function(){
             if (Util.urlMatch('_ffjm_swf_intrpt')) {
                 this.echo(d()+"New Enemy appered.")
-                boss.initialize.apply(this, arguments)
+                boss.init()
                 return
             }
             // enemy stat get start
@@ -53,8 +52,8 @@ Boss.prototype = {
             var r = s.match(/(.*)HP:(.*)/i)
             if (r == null) {
                 this.echo(d()+"Cant found enemy info")
-                boss.initialize.apply(this, arguments)
-                return;
+                boss.init()
+                return
             }
             var name_and_lv = RegExp.$1// ｶｰﾊﾞﾝｸﾙ36
             var other_info = RegExp.$2// 205316/2641548逃亡まであと13分58秒××詳細
@@ -64,13 +63,13 @@ Boss.prototype = {
             other_info.match(/(\d+)\/(\d+).+?([0-9]+)分/)
             var boss_hp = parseInt(RegExp.$1)
             if (boss.hp != 0 && boss.hp < boss_hp) {
-                boss.initialize.apply(this, arguments)
+                boss.init()
                 return
             }
             boss.hp = boss_hp
             var boss_hp_max = parseInt(RegExp.$2)
             if (boss.hp_max != 0 && boss.hp_max != boss_hp_max) {
-                boss.initialize.apply(this, arguments)
+                boss.init()
                 return
             }
             boss.hp_max = boss_hp_max;
