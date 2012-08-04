@@ -7,9 +7,9 @@ var m = new Main()
 var chara = new Chara()
 var boss = new Boss()
 
-var ATTACK_WAIT = 0;
-var ATTACK_FULL = 3;
-var ATTACK_NORMAL = 1;
+var ATTACK_WAIT = 0
+var ATTACK_FULL = 3
+var ATTACK_NORMAL = 1
 function decide_attack_type(bp, hp, is_attacked) {
     if (ConfigGame.ENEMY_HP_BORDER_FULL_ATTACK < hp && bp == 3) {
         return ATTACK_FULL;
@@ -60,6 +60,8 @@ m.controller_attack = function() {
         Util.sleep(ConfigGame.INTERVAL_ENEMY_CHECK)
         return
     }
+    // 攻撃直前にbtl_rdyを開かないと攻撃してくれない仕組みらしい
+    Util.open(URL.ffb_team_btl_rdy())
     // 攻撃してくれない様なら、ここのコメントアウト外して調べる
     Util.echo(URL.ffb_attack_url(chk_id, attack_type))
     casper.thenOpen(URL.ffb_attack_url(chk_id, attack_type), function(){
